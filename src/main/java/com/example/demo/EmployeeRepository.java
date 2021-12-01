@@ -11,9 +11,9 @@ public class EmployeeRepository {
 
         Employee employee = new Employee();
 
-        employee.setName("oleg");
-        employee.setEmail(" ");
-        employee.setCountry(" ");
+        employee.setName("Nika");
+        employee.setEmail("nika@gmail.com ");
+        employee.setCountry("Ukrain ");
         save(employee);
     }
 
