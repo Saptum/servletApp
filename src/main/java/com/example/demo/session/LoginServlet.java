@@ -21,8 +21,8 @@ public class LoginServlet extends HttpServlet {
 
         String user = request.getParameter("user");
         String pwd = request.getParameter("pwd");
-        LoginDataStructure.initMap();
-        LoginDataStructure.initList();
+        LoginDataStructure.initMapUsers();
+
 
 
         if (LoginDataStructure.checkInitMap(user, pwd)) {
@@ -37,7 +37,6 @@ public class LoginServlet extends HttpServlet {
         } else {
             PrintWriter out = response.getWriter();
             out.println("Either user name or password is wrong!");
-            log("Something wrong");
         }
     }
 
