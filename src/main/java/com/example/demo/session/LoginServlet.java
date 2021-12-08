@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // Это название 2-х параметров, которые мы передаем
+
         String user = request.getParameter("user");
         String pwd = request.getParameter("pwd");
 
@@ -44,10 +44,10 @@ public class LoginServlet extends HttpServlet {
 
 
     public boolean checkerLogAndPass(String login, String password) throws SQLException {
-        ResultSet rs = LoginRepository.getLoginInfo();
+        ResultSet resultSet = LoginRepository.getLoginInfo();
         HashMap<String, String> map = new HashMap<>();
-        while (rs.next()) {
-            map.put(rs.getString("login"), rs.getString("password"));
+        while (resultSet.next()) {
+            map.put(resultSet.getString("login"), resultSet.getString("password"));
         }
         if (map.containsKey(login) && map.get(login).equals(password)) {
             return true;
