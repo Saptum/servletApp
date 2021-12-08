@@ -3,7 +3,7 @@ package com.example.demo.session;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 public class LoginDataStructure {
 
@@ -18,29 +18,27 @@ public class LoginDataStructure {
         list.add(new String[]{"Ezio", "creed"});
     }
 
+    public static boolean checkInitList(String login, String password) {
+        for (String[] strings : list
+        ) {
+            if (strings[0].equals(login) && strings[1].equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void initMap() {
         map.put("Sam", "241424");
         map.put("Din", "super");
         map.put("Harry", "423rvq32");
         map.put("Tom", "353q514");
         map.put("Ezio", "creed");
-
     }
 
     public static boolean checkInitMap(String login, String password) {
         if (map.containsKey(login) && map.get(login).equals(password)) {
             return true;
-        }
-        return false;
-    }
-
-
-    public static boolean checkInitList(String login, String password) {
-        for (String[] x : list
-        ) {
-            if (x[0].equals(login) && x[1].equals(password)) {
-                return true;
-            }
         }
         return false;
     }

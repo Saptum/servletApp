@@ -46,9 +46,8 @@ public class LoginServlet extends HttpServlet {
     public boolean check(String login, String password) throws SQLException {
         ResultSet rs = LoginRepository.getLoginInfo();
         HashMap<String, String> map = new HashMap<>();
-
         while (rs.next()) {
-            map.put(rs.getString("Login"), rs.getString("Password"));
+            map.put(rs.getString("login"), rs.getString("password"));
         }
         if (map.containsKey(login) && map.get(login).equals(password)) {
             return true;

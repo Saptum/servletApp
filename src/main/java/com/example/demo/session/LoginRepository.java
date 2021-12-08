@@ -6,7 +6,8 @@ public class LoginRepository {
     public static void main(String[] args) {
         getConnection();
     }
-    public static Connection getConnection(){
+
+    public static Connection getConnection() {
         Connection connection = null;
         String url = "jdbc:postgresql://localhost:5432/employee";
         String user = "postgres";
@@ -25,13 +26,13 @@ public class LoginRepository {
         return connection;
     }
 
-    public static ResultSet getLoginInfo(){
+    public static ResultSet getLoginInfo() {
         ResultSet rs = null;
-        try{
+        try {
             Connection connection = LoginRepository.getConnection();
             PreparedStatement ps = connection.prepareStatement("SELECT login.Login, login.Password FROM login");
             rs = ps.executeQuery();
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return rs;
