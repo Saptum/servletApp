@@ -19,7 +19,6 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // Это название 2-х параметров, которые мы передаем
         String user = request.getParameter("user");
         String pwd = request.getParameter("pwd");
         LoginDataStructure.initMap();
@@ -29,7 +28,6 @@ public class LoginServlet extends HttpServlet {
         if (LoginDataStructure.checkInitMap(user, pwd)) {
             HttpSession session = request.getSession();
             session.setAttribute("user", "user");
-            //setting session to expiry in 30 mins
             session.setMaxInactiveInterval(30 * 60);
             Cookie userName = new Cookie("user", user);
             userName.setMaxAge(30 * 60);
@@ -43,7 +41,7 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    public boolean check(String login, String password) throws SQLException {
+    public boolean checkerLogAndPass(String login, String password) throws SQLException {
         ResultSet rs = LoginRepository.getLoginInfo();
         HashMap<String, String> map = new HashMap<>();
         while (rs.next()) {
