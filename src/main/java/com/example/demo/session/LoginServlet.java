@@ -40,16 +40,17 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    public boolean checkerLogAndPass(String login, String password) throws SQLException {
-        ResultSet rs = LoginRepository.getLoginInfo();
-        HashMap<String, String> map = new HashMap<>();
-        while (rs.next()) {
-            map.put(rs.getString("login"), rs.getString("password"));
-        }
-        if (map.containsKey(login) && map.get(login).equals(password)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public boolean checkerLogAndPass(String login, String password) throws SQLException {
+//        ResultSet rs = LoginRepository.getLoginInfo();
+//        HashMap<String, String> map = new HashMap<>();
+//        while (rs.next()) {
+//            map.put(rs.getString("login"), rs.getString("password"));
+//        }
+//        if (map.containsKey(login) && map.get(login).equals(password)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+
 }
