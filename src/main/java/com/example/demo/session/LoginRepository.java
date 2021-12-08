@@ -8,12 +8,7 @@ import java.sql.*;
 public class LoginRepository {
     public static void main(String[] args) {
         getConnection();
-        Employee employee = new Employee();
 
-        employee.setName("Sam");
-        employee.setEmail("sam@gmail.com ");
-        employee.setCountry("America");
-        save(employee);
     }
 
     public static Connection getConnection() {
@@ -47,21 +42,4 @@ public class LoginRepository {
         return resultSet;
     }
 
-    public static int save(Employee employee) {
-        int status = 0;
-        try {
-            Connection connection = EmployeeRepository.getConnection();
-            PreparedStatement ps = connection.prepareStatement("insert into users(name,email,country) values (?,?,?)");
-            ps.setString(1, employee.getName());
-            ps.setString(2, employee.getEmail());
-            ps.setString(3, employee.getCountry());
-
-            status = ps.executeUpdate();
-            connection.close();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return status;
-    }
 }
