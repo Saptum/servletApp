@@ -38,4 +38,5 @@ public class LogoutServlet extends HttpServlet {
         out.println("Either user name or password is wrong!");
     }
 
+
 }
