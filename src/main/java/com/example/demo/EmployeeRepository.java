@@ -13,21 +13,21 @@ public class EmployeeRepository {
 
         employee.setName("Nika");
         employee.setEmail("nika@gmail.com ");
-        employee.setCountry("Ukrain ");
+        employee.setCountry("Japan ");
         save(employee);
     }
 
     public static Connection getConnection() {
 
         Connection connection = null;
-        String url = "jdbc:mysql://localhost:3306/employee";
-        String user = "root";
+        String url = "jdbc:postgresql://localhost:5432/employee";
+        String user = "postgres";
         String password = "9640";
 
         try {
             connection = DriverManager.getConnection(url, user, password);
             if (connection != null) {
-                System.out.println("Connected to the MySQL server successfully.");
+                System.out.println("Connected to the PostgreSQL server successfully.");
             } else {
                 System.out.println("Failed to make connection!");
             }

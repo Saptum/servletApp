@@ -19,7 +19,6 @@ public class LoginServlet extends HttpServlet {
         // Это название 2-х параметров, которые мы передаем
         String user = request.getParameter("user");
         String pwd = request.getParameter("pwd");
-        // Это значение наших параметров
         String userID = "admin";
         String password = "password";
 
@@ -36,6 +35,7 @@ public class LoginServlet extends HttpServlet {
         } else {
             PrintWriter out = response.getWriter();
             out.println("Either user name or password is wrong!");
+            log("Something wrong");
         }
     }
 }
