@@ -22,8 +22,7 @@ public class LoginServlet extends HttpServlet {
         String user = request.getParameter("user");
         String pwd = request.getParameter("pwd");
         LoginDataStructure.initMapUsers();
-
-
+        LoginDataStructure.initListUsers();
 
         if (LoginDataStructure.checkInitMap(user, pwd)) {
             HttpSession session = request.getSession();

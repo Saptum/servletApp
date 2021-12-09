@@ -17,7 +17,7 @@ public class LoginDataStructure {
         mapUsers.put("Ezio", "creed");
     }
 
-    public static void initList(){
+    public static void initListUsers(){
         listUsers.add(new String[]{"Sam", "241424"});
         listUsers.add(new String[]{"Din", "super"});
         listUsers.add(new String[]{"Harry", "423rvq32"});
