@@ -19,7 +19,6 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
         String user = request.getParameter("user");
         String pwd = request.getParameter("pwd");
 
