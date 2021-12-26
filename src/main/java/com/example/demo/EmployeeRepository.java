@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -156,6 +157,54 @@ public class EmployeeRepository {
         }
         connection.close();
         return result;
+    }
+
+    public static void deleteOrder(int orderID) throws SQLException {
+        Connection connection = getConnection();
+        PreparedStatement ps = connection.prepareStatement("DELETE FROM  orders WHERE id=?");
+        PreparedStatement ps2 = connection.prepareStatement("DELETE FROM  OrderProducts WHERE orderID=?");
+        ps.setInt(1, orderID);
+        ps2.setInt(1, orderID);
+        ps2.executeUpdate();
+        ps.executeUpdate();
+        connection.close();
+    }
+
+    public static void createOrder(int userID, int productID, int number, String date, String destination) throws SQLException {
+        ResultSet rs = null;
+        int result = 0;
+        Connection connection = getConnection();
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO orders(date, destination, userID) " +
+                " VALUES (?,?,?)");
+        ps.setString(1, date);
+        ps.setString(2, destination);
+        ps.setInt(3, userID);
+        ps.executeUpdate();
+        PreparedStatement ps2 = connection.prepareStatement("SELECT MAX(id) FROM orders");
+        rs = ps2.executeQuery();
+        while (rs.next()){
+            result = rs.getInt(1);
+        }
+        connection.close();
+        addProducts(productID, result, number);
+    }
+
+    public static ResultSet viewProducts() throws SQLException {
+        Connection connection = getConnection();
+        ResultSet rs = null ;
+        PreparedStatement ps = connection.prepareStatement("SELECT* FROM products");
+        rs = ps.executeQuery();
+        return rs;
+    }
+
+    public static void addProducts(int productID, int orderID,int number) throws SQLException {
+        Connection connection = getConnection();
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO OrderProducts VALUES (?,?,?)");
+        ps.setInt(1, productID);
+        ps.setInt(2, orderID);
+        ps.setInt(3, number);
+        ps.executeUpdate();
+        connection.close();
     }
 
 }
