@@ -207,4 +207,22 @@ public class EmployeeRepository {
         connection.close();
     }
 
+    public static void showProducts(PrintWriter out)throws SQLException {
+        ResultSet rs = EmployeeRepository.viewProducts();
+        List<Product> productList = new ArrayList<>();
+        while (rs.next()){
+            productList.add(
+                    new Product(rs.getString("name"), rs.getInt("id"), rs.getInt("price"),
+                            rs.getString("description"))
+            );
+        }
+        for (Product x:productList
+        ) {
+            out.println("Name " + x.getName());
+            out.println("Id " + x.getId());
+            out.println("Price " + x.getPrice());
+            out.println("Description " + x.getDescription());
+        }
+        out.close();
+    }
 }
