@@ -144,4 +144,18 @@ public class EmployeeRepository {
         }
         return listEmployees;
     }
+
+    public static String getByCountry(String c) throws SQLException {
+        String result = new String();
+        Connection connection = new EmployeeRepository().getConnection();
+        PreparedStatement ps = connection.prepareStatement("SELECT name from users WHERE country=?");
+        ps.setString(1, c);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            result = rs.getString(1);
+        }
+        connection.close();
+        return result;
+    }
+
 }
