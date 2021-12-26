@@ -225,4 +225,23 @@ public class EmployeeRepository {
         }
         out.close();
     }
+
+    public static void viewOrders(PrintWriter out) throws SQLException {
+        ResultSet rs = null;
+        List<Order> orders = new ArrayList<>();
+        Connection connection = getConnection();
+        PreparedStatement ps = connection.prepareStatement("SELECT * FROM orders");
+        rs = ps.executeQuery();
+        while (rs.next()){
+            orders.add(new Order(rs.getInt("id"), rs.getString("date"),
+                    rs.getString("destination"), rs.getInt("userID")));
+        }
+        for (Order order:orders
+        ) {
+            out.println("Id: " + order.getId());
+            out.println("Date: " + order.getDate());
+            out.println("Destination: " + order.getDestination());
+            out.println("UserID: " + order.getUserID());
+        }
+    }
 }
