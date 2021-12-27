@@ -10,7 +10,7 @@ public class UsersRepository {
         Connection connection = null;
         String url = "jdbc:postgresql://localhost:5432/employee";
         String user = "postgres";
-        String password = "postgres";
+        String password = "9640";
 
         try {
             connection = DriverManager.getConnection(url, user, password);
@@ -25,14 +25,14 @@ public class UsersRepository {
         return connection;
     }
 
-    public static int save (User users) {
+    public static int save(User users) {
         int status = 0;
 
         try {
             Connection connection = UsersRepository.getConnection();
             PreparedStatement ps = connection.prepareStatement("insert into usersreg(login,password) values (?,?)");
-            ps.setString(1,users.getLogin());
-            ps.setString(2,users.getPassword());
+            ps.setString(1, users.getLogin());
+            ps.setString(2, users.getPassword());
 
             status = ps.executeUpdate();
             connection.close();
@@ -44,7 +44,7 @@ public class UsersRepository {
         return status;
     }
 
-    public static User getUserByLogin(String login){
+    public static User getUserByLogin(String login) {
 
         User users = new User();
 
@@ -96,7 +96,7 @@ public class UsersRepository {
         return listUsers;
     }
 
-    public  static  ResultSet getAllUsersRs() throws SQLException {
+    public static ResultSet getAllUsersRs() throws SQLException {
         ResultSet rs = null;
         Connection connection = UsersRepository.getConnection();
         PreparedStatement ps = connection.prepareStatement("select usersreg.login, usersreg.password from usersreg");
