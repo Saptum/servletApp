@@ -6,6 +6,15 @@ public class Employee {
     private String name;
     private String country;
     private String email;
+    private boolean status;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     public int getId() {
         return id;
@@ -48,4 +57,5 @@ public class Employee {
                 ", email='" + email + '\'' +
                 '}';
     }
+
 }

@@ -13,14 +13,18 @@ import java.util.List;
 public class ViewServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
         List<Employee> list = EmployeeRepository.getAllEmployees();
 
         for (Employee employee : list) {
-            out.print(employee);
+            if (!employee.isStatus()) {
+                out.print(employee);
+            } else {
+                out.print( "Account with ID " + employee.getId() + " has been delete\n");
+            }
+
         }
         out.close();
     }

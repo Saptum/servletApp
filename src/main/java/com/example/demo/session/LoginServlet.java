@@ -16,26 +16,25 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // Это название 2-х параметров, которые мы передаем
-        String user = request.getParameter("user");
+        String log = request.getParameter("user");
         String pwd = request.getParameter("pwd");
-        // Это значение наших параметров
-        String userID = "admin";
-        String password = "password";
+        LoginRepository.initMapUser();
 
-        if (userID.equals(user) && password.equals(pwd)) {
+
+        if (LoginRepository.chekMapUser(log, pwd)) {
             HttpSession session = request.getSession();
             session.setAttribute("user", "user");
-            //setting session to expiry in 30 mins
+            //setting session to expiry in 30 min
             session.setMaxInactiveInterval(30 * 60);
-            Cookie userName = new Cookie("user", user);
+            Cookie userName = new Cookie("user", log);
             userName.setMaxAge(30 * 60);
             response.addCookie(userName);
             PrintWriter out = response.getWriter();
-            out.println("Welcome back to the team, " + user + "!");
+            out.println("Welcome back to the team, " + log + "!" + " You using Map for save your login and password!");
         } else {
             PrintWriter out = response.getWriter();
             out.println("Either user name or password is wrong!");
         }
     }
 }
+
