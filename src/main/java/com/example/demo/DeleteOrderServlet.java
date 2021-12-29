@@ -15,6 +15,7 @@ public class DeleteOrderServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         int orderId = Integer.parseInt(request.getParameter("orderID"));
         if (orderId != 0) {
+
             try {
                 EmployeeRepository.deleteOrder(orderId);
                 out.println("Order was deleted!");
