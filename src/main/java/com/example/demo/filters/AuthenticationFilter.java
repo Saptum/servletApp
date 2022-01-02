@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 @WebFilter("/*")
 public class AuthenticationFilter implements Filter {
 
-    private ServletContext  servletContext;
+    private ServletContext servletContext;
 
     public void init(FilterConfig fConfig) throws ServletException {
         this.servletContext = fConfig.getServletContext();
@@ -22,12 +22,15 @@ public class AuthenticationFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        AuthentificationCheck.checkMapInit();
+        AuthentificationCheck.authListInit();
 
         String uri = req.getRequestURI();
 
         this.servletContext.log("Requested Resource::http://localhost:8080" + uri);
 
         HttpSession session = req.getSession(false);
+
 
         if (session == null){
             if (AuthentificationCheck.checkLogin(uri)){
@@ -37,16 +40,34 @@ public class AuthenticationFilter implements Filter {
                 PrintWriter out = res.getWriter();
                 out.println("No access because you have not logged in!!!");
             }
-       }else if (!AuthentificationCheck.checkListUri(uri)) {
+        }else if (!AuthentificationCheck.checkMapUri(uri)) {
             this.servletContext.log("<<< Unauthorized access request");
             PrintWriter out = res.getWriter();
             out.println("You have no rights to do that!!!");
         } else {
             chain.doFilter(request, response);
-       }
+        }
+
+
+//        if (session == null){
+//            if (AuthentificationCheck.checkLogin(uri)){
+//                chain.doFilter(request, response);
+//            }else {
+//                this.context.log("<<< Unauthorized access request");
+//                PrintWriter out = res.getWriter();
+//                out.println("No access because you have not logged in!!!");
+//            }
+//        }else if (!AuthentificationCheck.checkListUri(uri)) {
+//            this.context.log("<<< Unauthorized access request");
+//            PrintWriter out = res.getWriter();
+//            out.println("You have no rights to do that!!!");
+//        } else {
+//            chain.doFilter(request, response);
+//        }
     }
 
     public void destroy() {
         //close any resources here
     }
+
 }
