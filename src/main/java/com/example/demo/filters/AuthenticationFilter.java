@@ -11,11 +11,11 @@ import java.io.PrintWriter;
 @WebFilter("/*")
 public class AuthenticationFilter implements Filter {
 
-    private ServletContext context;
+    private ServletContext  servletContext;
 
     public void init(FilterConfig fConfig) throws ServletException {
-        this.context = fConfig.getServletContext();
-        this.context.log(">>> AuthenticationFilter initialized");
+        this.servletContext = fConfig.getServletContext();
+        this.servletContext.log(">>> AuthenticationFilter initialized");
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -25,7 +25,7 @@ public class AuthenticationFilter implements Filter {
 
         String uri = req.getRequestURI();
 
-        this.context.log("Requested Resource::http://localhost:8080" + uri);
+        this.servletContext.log("Requested Resource::http://localhost:8080" + uri);
 
         HttpSession session = req.getSession(false);
 
@@ -33,12 +33,12 @@ public class AuthenticationFilter implements Filter {
             if (AuthentificationCheck.checkLogin(uri)){
                 chain.doFilter(request, response);
             }else {
-                this.context.log("<<< Unauthorized access request");
+                this.servletContext.log("<<< Unauthorized access request");
                 PrintWriter out = res.getWriter();
                 out.println("No access because you have not logged in!!!");
             }
         }else if (!AuthentificationCheck.checkMapUri(uri)) {
-            this.context.log("<<< Unauthorized access request");
+            this.servletContext.log("<<< Unauthorized access request");
             PrintWriter out = res.getWriter();
             out.println("You have no rights to do that!!!");
         } else {
