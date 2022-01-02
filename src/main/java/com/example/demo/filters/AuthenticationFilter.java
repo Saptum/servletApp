@@ -38,12 +38,12 @@ public class AuthenticationFilter implements Filter {
             }else {
                 this.servletContext.log("<<< Unauthorized access request");
                 PrintWriter out = res.getWriter();
-                out.println("No access because you have not logged in!!!");
+                out.println("No access because you have not logged in");
             }
         }else if (!AuthentificationCheck.checkMapUri(uri)) {
             this.servletContext.log("<<< Unauthorized access request");
             PrintWriter out = res.getWriter();
-            out.println("You have no rights to do that!!!");
+            out.println("You have  problem with it");
         } else {
             chain.doFilter(request, response);
         }
@@ -55,12 +55,12 @@ public class AuthenticationFilter implements Filter {
             }else {
                 this.servletContext.log("<<< Unauthorized access request");
                 PrintWriter out = res.getWriter();
-                out.println("No access because you have not logged in!!!");
+                out.println("No access because you have not logged in");
             }
         }else if (!AuthentificationCheck.checkListUri(uri)) {
             this.servletContext.log("<<< Unauthorized access request");
             PrintWriter out = res.getWriter();
-            out.println("You have no rights to do that!!!");
+            out.println("You have problem with it");
         } else {
             chain.doFilter(request, response);
         }
