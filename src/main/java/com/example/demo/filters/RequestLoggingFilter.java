@@ -35,7 +35,7 @@ public class RequestLoggingFilter implements Filter {
                 this.context.log(req.getRemoteAddr() + "::Cookie::{" + cookie.getName() + "," + cookie.getValue() + "}");
             }
         }
-        // pass the request along the filter chain
+
         chain.doFilter(request, response);
     }
 
